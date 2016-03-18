@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <style>
+        * {
+            font-family: Montserrat, sans-serif;
+        }
+        html, body {
+            height: 85%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>Upload</h1>
+
+<form id="uploadForm" action="/api/photo" enctype="multipart/form-data" method="post">
+    <!--name: this value needs to be the same as in multer().single(<name>);-->
+    <!--add 'multiple' to upload multiple files-->
+    <input id="myFile" type="file" name="userPhoto">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+<progress min="0" max="100" value="0">0% complete</progress>
+
+<button id="testButton">testButton</button>
+
+<script>
+
+    var form = document.getElementById('uploadForm');
+    var myFile = document.getElementById('myFile');
+
+    var testButton = document.getElementById('testButton');
+
+
+    //myFiles.files returns 'FileList'
+    testButton.addEventListener('click', function(event){
+        console.log(myFile.files[0]);
+    });
+
+
+    form.addEventListener('submit', function(event){
+       //event.preventDefault();
+
+        //only upload one
+        uploadFiles('/api/photo', myFile.files[0]);
+
+        //console.log('sending');
+
+    });
+
+    //TODO make AJAX
+
+    //SINGLE FILE UPLOAD TODO: implement multi-file upload after understanding has been achieved.
+
+     function uploadFiles(url, file){
+         //var formData = new FormData();
+
+         //formData.append(file.name, file);
+
+         var xhr = new XMLHttpRequest();
+         //can xhr.open(<method>, <url>, async);
+         xhr.open('POST', url, true);
+
+         xhr.onload = function(event){
+             console.log('file transfer started');
+
+         };
+
+         xhr.onerror = function(error){
+             console.log(Error('something horrible just happened!'));
+         };
+
+         xhr.onprogress = function(event) {
+             console.log('uploading...');
+         }
+
+         xhr.send(file);
+     }
+
+    //OLD
+//    /**
+//     * Send Form
+//     * @param form
+//     * @returns {boolean}
+//     */
+//    function sendForm(form){
+//        var formData = new FormData();
+//
+//        formData.append('secret_token', '1234567890');  //append extra data before sending.
+//
+//        var xhr = new XMLHttpRequest();
+//        xhr.open('POST', form.action, true);
+//        xhr.onload = function(event){
+//            //do something
+//        };
+//
+//        xhr.send(formData);
+//
+//        return false;
+//    }
+//
+//    /**
+//     * Upload Files
+//     * @param url
+//     * @param files
+//     */
+//    function uploadFiles(url, files){
+//        var formData = new FormData();
+//
+//        for(var i = 0, file; file = files[i]; i++) {
+//
+//        }
+//    }
+</script>
+
+</body>
+</html>

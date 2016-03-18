@@ -1,0 +1,14 @@
+{
+  "name": "aframe-play",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "colors": "latest",
+    "express": "^4.13.3",
+    "multer": "^1.1.0",
+    "serve-favicon": "latest",
+    "file-type":"latest",
+    "body-parser": "^1.14.2",
+    "mongoose":"latest"
+  }
+}
