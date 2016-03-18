@@ -1,5 +1,5 @@
 /**
- * 180 Previewer (transporter)
+ * Aframe-Play server
  */
 
 /* MODULES */
@@ -59,7 +59,6 @@ app.get('/', function(request, response){
     response.sendFile(__dirname + '/public/index.html');
 });
 
-/
 // basic 404 catch-all middleware
 app.get('*', function(request, response){
     response.sendFile(__dirname + '/public/404.html');
